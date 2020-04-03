@@ -15,8 +15,8 @@
 package main
 
 import (
-	"github.com/romikser/go-mobile-collection-wrapper/mapWrapper"
-	"github.com/romikser/go-mobile-collection-wrapper/sliceWrapper"
+	"github.com/kwhitestone/go-mobile-collection-wrapper/mapWrapper"
+	"github.com/kwhitestone/go-mobile-collection-wrapper/sliceWrapper"
 	"log"
 	"os"
 )
