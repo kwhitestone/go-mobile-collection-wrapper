@@ -65,6 +65,7 @@ func (m *{{.KeyTitle}}{{.Value}}Map) Clone() *{{.KeyTitle}}{{.Value}}Map {
 		nS[k] = v
 	}
 	return &{{.KeyTitle}}{{.Value}}Map{
+		Mutex: sync.Mutex{},
 		s: nS,
 	}
 }
@@ -137,7 +138,7 @@ func new{{.KeyTitle}}{{.Value}}MapWithObjects(objects map[{{.Key}}]{{.Value}}) *
 		v1 := v
 		pMap[k] = &v1
 	}
-	return &{{.KeyTitle}}{{.Value}}Map{pMap}
+	return &{{.KeyTitle}}{{.Value}}Map{sync.Mutex{}, pMap}
 }
 
 {{end}}`

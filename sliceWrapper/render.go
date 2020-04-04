@@ -54,13 +54,22 @@ type GeneratedType struct {
 	PointerType bool
 }
 
-func getRenderedPath(inputPath string) (string, error) {
+//func getRenderedPath(inputPath string) (string, error) {
+//	if !strings.HasSuffix(inputPath, ".go") {
+//		return "", fmt.Errorf("Input path %s doesn't have .go extension", inputPath)
+//	}
+//	trimmed := strings.TrimSuffix(inputPath, ".go")
+//	dir, file := filepath.Split(trimmed)
+//	return filepath.Join(dir, fmt.Sprintf("%s_slice.go", file)), nil
+//}
+
+func getTypeRenderPath(inputPath string, typeName string) (string, error) {
 	if !strings.HasSuffix(inputPath, ".go") {
 		return "", fmt.Errorf("Input path %s doesn't have .go extension", inputPath)
 	}
 	trimmed := strings.TrimSuffix(inputPath, ".go")
-	dir, file := filepath.Split(trimmed)
-	return filepath.Join(dir, fmt.Sprintf("%s_slice.go", file)), nil
+	dir, _ := filepath.Split(trimmed)
+	return filepath.Join(dir, fmt.Sprintf("%s_slice.go", typeName)), nil
 }
 
 type generateTemplateData struct {

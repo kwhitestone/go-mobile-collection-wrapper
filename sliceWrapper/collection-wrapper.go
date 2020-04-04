@@ -40,27 +40,29 @@ func ProcessFile(inputPath string, externalTypes []string) {
 				PointerType: eT == strings.Title(eT),
 			}
 			types = append(types, newType)
+
+			func() {
+				log.Printf("Found slice-wrapper types to generate: %#v", types)
+
+				outputPath, err := getTypeRenderPath(inputPath, eT)
+				if err != nil {
+					log.Fatalf("Could not get output path: %s", err)
+				}
+
+				if len(types) == 0 {
+					return
+				}
+
+				output, err := os.OpenFile(outputPath, os.O_WRONLY|os.O_CREATE, 0600)
+				if err != nil {
+					log.Fatalf("Could not open output file: %s", err)
+				}
+				defer output.Close()
+
+				if err := render(output, packageName, types); err != nil {
+					log.Fatalf("Could not generate go code: %s", err)
+				}
+			}()
 		}
-	}
-
-	log.Printf("Found slice-wrapper types to generate: %#v", types)
-
-	outputPath, err := getRenderedPath(inputPath)
-	if err != nil {
-		log.Fatalf("Could not get output path: %s", err)
-	}
-
-	if len(types) == 0 {
-		return
-	}
-
-	output, err := os.OpenFile(outputPath, os.O_WRONLY|os.O_CREATE, 0600)
-	if err != nil {
-		log.Fatalf("Could not open output file: %s", err)
-	}
-	defer output.Close()
-
-	if err := render(output, packageName, types); err != nil {
-		log.Fatalf("Could not generate go code: %s", err)
 	}
 }
