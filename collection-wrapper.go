@@ -17,6 +17,7 @@ package main
 import (
 	"github.com/kwhitestone/go-mobile-collection-wrapper/mapWrapper"
 	"github.com/kwhitestone/go-mobile-collection-wrapper/sliceWrapper"
+	"github.com/kwhitestone/go-mobile-collection-wrapper/syncMapWrapper"
 	"log"
 	"os"
 )
@@ -24,6 +25,9 @@ import (
 func processFile(inputPath string) {
 	log.Printf("Processing file %s", inputPath)
 	typesToGenerateSlices := mapWrapper.ProcessFile(inputPath)
+	if len(typesToGenerateSlices)==0 {
+		typesToGenerateSlices = syncMapWrapper.ProcessFile(inputPath)
+	}
 	sliceWrapper.ProcessFile(inputPath, typesToGenerateSlices)
 }
 
