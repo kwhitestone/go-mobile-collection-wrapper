@@ -131,9 +131,7 @@ func (m *{{.KeyTitle}}{{.Value}}Map) objectsMap() map[{{.Key}}]{{.Value}} {
 	return res
 }
 
-func new{{.KeyTitle}}{{.Value}}MapWithObjects(objects map[{{.Key}}]{{.Value}}) *{{.KeyTitle}}{{.Value}}Map {
-	m.Lock()
-	defer m.Unlock()
+func new{{.KeyTitle}}{{.Value}}MapWithObjects(objects map[{{.Key}}]{{.Value}}) *{{.KeyTitle}}{{.Value}}Map {	
 	pMap := make(map[{{.Key}}]*{{.Value}})
 	for k, v := range objects {
 		v1 := v
